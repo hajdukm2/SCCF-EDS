@@ -7,9 +7,36 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VariableStore.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate> {
+    
+    
+    IBOutlet UIButton *button1;
+    IBOutlet UIButton *button2;
+    IBOutlet UIImageView *white;
+    
+    
+    
+    
+    
+    IBOutlet UIImageView *ImageView;
+    UIImagePickerController *picker;
+    UIImage *image;
+}
+
+-(IBAction)hide1;
+-(IBAction)hide2;
+
+
+-(IBAction)reveal1;
+-(IBAction)reveal2;
+
+
+- (IBAction)TakePhoto:(id)sender;
+- (IBAction)PhotoLibary:(id)sender;
 
 
 @end
+
 
