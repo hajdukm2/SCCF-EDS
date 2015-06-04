@@ -340,6 +340,12 @@
     NSMutableData *data = [[NSMutableData alloc] init];
     //self.receivedData = data;
     
+    CGSize newSize = CGSizeMake(612.0f, 816.0f);
+    
+    UIGraphicsBeginImageContext(newSize);
+    [[[VariableStore sharedInstance] getImage] drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
     //*** ^PUT YOUR CODE BELOW, USE VARIABLES ABOVE^ ***
     
@@ -378,7 +384,7 @@
     //Image Uploading
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://EDSAppLB-1862368837.us-west-2.elb.amazonaws.com/"]];
-    NSData *imageData = UIImageJPEGRepresentation([[VariableStore sharedInstance] getImage], 1.0);
+    NSData *imageData = UIImageJPEGRepresentation(newImage, 1.0);
     
     [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
     [request setHTTPShouldHandleCookies:NO];
