@@ -1,7 +1,6 @@
 <?php
+    require ("QA_Server_HelperFunctions.php");
 
-include 'helperfunctions.php';
-
-logout();
-
+    //Log the User Out of the System
+    logout();
 ?>

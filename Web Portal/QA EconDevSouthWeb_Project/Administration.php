@@ -1,10 +1,14 @@
-<?php session_start();?>
-<! DOCTYPE HTML>
+<?php 
+    require ("QA_Server_HelperFunctions.php");
+    
+    checkLogin();
+?>
+<!DOCTYPE HTML>
 <html>
 	<html lang="en">
 	<head>
 		<title>
-		EDS Adminisrtation
+		EDS Administration
 		</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
@@ -53,12 +57,6 @@
 		</script>
 	</head>
 	<body style="padding-top: 70px; ">
-	<?php 
-		include 'helperfunctions.php';
-		checkLogin();
-		
-		$f = 4;
-	?>
 		<div class="container-fluid">
 		<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#99cc33" >
 	    		<div class="navbar-header" style="background-color:#99cc33">
@@ -100,8 +98,8 @@
 		    			<tbody>
 		    				<?php 
 		    					//Database Connection Stuff:
-		    					$db_connect = mysql_connect("qa-server-database.cd6byyjzs6xl.us-west-2.rds.amazonaws.com", "EDSQADB", "EDSQADBpass") or die(mysql_error());
-								mysql_select_db("Econ_Dev_South", $db_connect);
+		    					$db_connect = mysql_connect($databaseHost, $databaseUser, $databasePass) or die(mysql_error());
+								mysql_select_db($databaseName, $db_connect);
 
 							  	//How many issues are there?
 							  	$sqlQuery = "SELECT * FROM Environment_Issues";
