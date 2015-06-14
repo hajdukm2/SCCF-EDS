@@ -11,17 +11,23 @@
 #import <CoreLocation/CoreLocation.h>
 #import "Summary.h"
 
-@implementation MyLocationViewController{
+
+
+@implementation MyLocationViewController {
     
     CLLocationManager *manager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
+    
+    
 }
 
 
 
 -(IBAction)reveal1 {
     button1.hidden = NO;
+    button1.enabled = YES;
+    enterAddress.enabled = NO;
 }
 
 
@@ -31,15 +37,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    manager = [[CLLocationManager alloc] init];
-    [manager requestWhenInUseAuthorization];
-    geocoder = [[CLGeocoder alloc] init];
+
 
     // Do any additional setup after loading the view, typically from a nib.
     
    }
 
 -(IBAction)GetLocation:(id)sender {
+    
+
     mapview.showsUserLocation = YES;
 }
 
@@ -56,6 +62,7 @@
     manager.desiredAccuracy = kCLLocationAccuracyBest;
     
     [manager startUpdatingLocation];
+    
     
 }
 
@@ -104,6 +111,26 @@
 
     
 }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger length = enterAddress.text.length - range.length + string.length;
+    if (length > 0) {
+        button1.enabled = YES;
+    } else {
+        button1.enabled = NO;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+
+
+
+
+
 
 @end
 

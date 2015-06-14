@@ -12,6 +12,7 @@
 
 
 -(NSString*) getFName;
+-(NSString*) getAddress;
 -(NSString*) getLName;
 -(NSString*) getEMail;
 -(NSString*) getPNum;
@@ -25,6 +26,7 @@
 
 
 -(void) setFName: (NSString*)n;
+-(void) setAddress: (NSString*)n;
 -(void) setLName: (NSString*)n;
 -(void) setEMail: (NSString*)n;
 -(void) setPNum: (NSString*)n;

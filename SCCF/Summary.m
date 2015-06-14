@@ -25,10 +25,15 @@
 }
 
 
+
 - (void)viewDidLoad
 {
+    
 
+    
+    descript.text = [[VariableStore sharedInstance] getDescription];
     firstName.text = [[VariableStore sharedInstance] getFName];
+    adressy.text = [[VariableStore sharedInstance] getAddress];
     lastName.text = [[VariableStore sharedInstance] getLName];
     emailA.text = [[VariableStore sharedInstance] getEMail];
     pNumber.text = [[VariableStore sharedInstance] getPNum];
@@ -36,6 +41,7 @@
     looVal.text = [[VariableStore sharedInstance] getLongitude];
     laaVal.text = [[VariableStore sharedInstance] getLattitude];
     hazard.text = [[VariableStore sharedInstance] getHazard];
+   
     
     MKCoordinateRegion region = { {0.0, 0.0}, {0.0,0.0}};
     region.center.latitude = [[[VariableStore sharedInstance] getLattitude] doubleValue];
@@ -52,6 +58,9 @@
     [self writePNToFile:pNumber.text];
     [self writeEMToFile:emailA.text];
     [self writeZCToFile:zipCode.text];
+  
+
+    
  
     // Do any additional setup after loading the view, typically from a nib.
     
@@ -59,6 +68,9 @@
        
     [super viewDidLoad];
     
+    self->scrollyV.contentSize = CGSizeMake(309, 350);
+
+
     
     
     UIImage *statusImage = [UIImage imageNamed:@"1act1222 copy.png"];
@@ -315,6 +327,7 @@
 }
 
 
+
 - (IBAction)sendIt:(id)sender {
     submitting.hidden = NO;
     senditt.enabled = NO;
@@ -328,6 +341,7 @@
     
     //this is where i bring in all of the global variables
     NSString *firstName = [[VariableStore sharedInstance] getFName];
+    NSString *adressy = [[VariableStore sharedInstance] getAddress];
     NSString *lastName = [[VariableStore sharedInstance] getLName];
     NSString *eMail = [[VariableStore sharedInstance] getEMail];
     NSString *phoneNum = [[VariableStore sharedInstance] getPNum];
@@ -336,6 +350,7 @@
     NSString *lattitude = [[VariableStore sharedInstance] getLattitude];
     NSString *hazard = [[VariableStore sharedInstance] getHazard];
     NSString *description = [[VariableStore sharedInstance] getDescription];
+    
     //NSString *url = @"http://edsapplb-1862368837.us-west-2.elb.amazonaws.com";
     NSMutableData *data = [[NSMutableData alloc] init];
     //self.receivedData = data;
@@ -357,7 +372,7 @@
                                      cachePolicy:NSURLRequestUseProtocolCachePolicy
                                      timeoutInterval:60.0];*/
     
-    NSString *EnvironmentIssue = [NSString stringWithFormat:@"{\"firstName\" : \"%@\", \"lastName\" : \"%@\", \"phoneNumber\" : \"%@\", \"email\" : \"%@\", \"zipCode\" : \"%@\", \"issueType\" : \"%@\", \"description\" : \"%@\", \"longitude\" : \"%@\", \"latitude\" : \"%@\"}",firstName, lastName, phoneNum, eMail, zipCode, hazard, description, longitude, lattitude];
+    NSString *EnvironmentIssue = [NSString stringWithFormat:@"{\"address\" : \"%@\", \"firstName\" : \"%@\", \"lastName\" : \"%@\", \"phoneNumber\" : \"%@\", \"email\" : \"%@\", \"zipCode\" : \"%@\", \"issueType\" : \"%@\", \"description\" : \"%@\", \"longitude\" : \"%@\", \"latitude\" : \"%@\"}",adressy,firstName, lastName, phoneNum, eMail, zipCode, hazard, description, longitude, lattitude];
     
     //NSLog(@"JSON Data:\n%@",EnvironmentIssue);
     
