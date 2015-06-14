@@ -29,6 +29,8 @@ CLPlacemark *placemark;
 @property (strong, nonatomic) IBOutlet UIButton *getLocation;
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 @property (weak, nonatomic) IBOutlet UIButton *contin;
+@property (strong, nonatomic) IBOutlet UILabel *long2;
+@property (strong, nonatomic) IBOutlet UILabel *lat2;
 
 
 
@@ -43,8 +45,10 @@ CLPlacemark *placemark;
 {
     [self.manualAdd addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [super viewDidLoad];
-    self.manualAdd.delegate = self;
     
+    
+    self.manualAdd.delegate = self;
+
 }
 - (void)textFieldDidChange:(UITextField *)textField {
     if(textField == self.manualAdd)
@@ -58,11 +62,16 @@ self.contin.enabled = ([self.manualAdd.text length] > 0) ? YES : NO; }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    
+    //[self updateLongLat];
     CLLocation *location = [locations lastObject];
     CLLocationCoordinate2D coordinate = location.coordinate;
     
     self.latitudeLabel.text = [NSString stringWithFormat:@"%f", coordinate.latitude];
     self.longitudeLabel.text = [NSString stringWithFormat:@"%f", coordinate.longitude];
+    
+    [manager stopUpdatingLocation];
+    
     
     
     [[VariableStore sharedInstance] setLattitude : _latitudeLabel.text];
@@ -80,6 +89,8 @@ self.contin.enabled = ([self.manualAdd.text length] > 0) ? YES : NO; }
                                             
                                             [self.manualAdd sizeToFit];
                                         }];
+    
+    
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -118,35 +129,19 @@ self.contin.enabled = ([self.manualAdd.text length] > 0) ? YES : NO; }
     }
     [self.locationManager startUpdatingLocation];
     
-    // Show camera on real device for nice effect
-    BOOL hasCamera = ([[AVCaptureDevice devices] count] > 0);
-    if (hasCamera)
-    {
-        AVCaptureSession *session = [[AVCaptureSession alloc] init];
-        session.sessionPreset = AVCaptureSessionPresetHigh;
-        
-        AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-        [captureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-        [captureVideoPreviewLayer setFrame:self.backgroundImageView.bounds];
-        [self.backgroundImageView.layer addSublayer:captureVideoPreviewLayer];
-        
-        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-        NSError *error = nil;
-        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-        [session addInput:input];
-        [session startRunning];
-    }
-    else
-    {
-        self.backgroundImageView.image = [UIImage imageNamed:@"background"];
-    }
+  self.backgroundImageView.image = [UIImage imageNamed:@"background"];
+    
+    [self updateLongLat];
+    
+    
+    
 }
 
 
 - (IBAction)searchy:(id)sender {
     
     
-    
+    [self updateLongLat];
     
     [_manualAdd resignFirstResponder];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
@@ -175,17 +170,25 @@ self.contin.enabled = ([self.manualAdd.text length] > 0) ? YES : NO; }
 
 - (IBAction)continuu:(id)sender {
     
+    [self updateLongLat];
+    
+    
     if(_manualAdd.text != nil){
         [[VariableStore sharedInstance] setAddress : _manualAdd.text];
     }
     
     Summary *secondViewController =
-    [self.storyboard instantiateViewControllerWithIdentifier:@"nextOne"];
+    [self.storyboard instantiateViewControllerWithIdentifier:@"nextOne1"];
     [self presentViewController:secondViewController animated:YES completion:nil];
 
 }
 
+-(void)updateLongLat{
+    
+    _lat2.text = _latitudeLabel.text;
+    _long2.text = _longitudeLabel.text;
 
+}
 
 
 

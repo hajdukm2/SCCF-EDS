@@ -68,7 +68,7 @@
        
     [super viewDidLoad];
     
-    self->scrollyV.contentSize = CGSizeMake(309, 350);
+    self->scrollyV.contentSize = CGSizeMake(0, 350);
 
 
     
