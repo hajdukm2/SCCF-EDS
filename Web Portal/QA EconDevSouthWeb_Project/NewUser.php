@@ -18,7 +18,7 @@
 
     if(mysql_num_rows($result) > 0){
         $_SESSION['error_message'] = "Username is already Taken. Try Another!";
-        echo "Error Update: Username is already Taken. Try Another! <br><br>\n";
+        error_log ("Error Update: Username is already Taken. Try Another! <br><br>\n");
 
         //close database connection
         mysql_close($db_connect);
@@ -39,7 +39,7 @@
         //close database connection
         mysql_close($db_connect);
 
-        echo "Update: New User: '" . $username . "' Created.\n";
+        error_log ("Update: New User: '" . $username . "' Created.\n");
 
         //Send User back to Login Web Portal, clear any error messages
         $_SESSION['error_message'] = "";

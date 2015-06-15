@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>D06085E6-EA31-42A8-BD82-150272BEF8B3</string>
 	<key>IDESourceControlProjectName</key>
-	<string>SCCF</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>243D3CA1EC8D6027004E0D6CC48BE30843B71B5E</key>
 		<string>https://github.com/hajdukm2/SCCF-EDS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>SCCF.xcodeproj</string>
+	<string>SCCF.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>243D3CA1EC8D6027004E0D6CC48BE30843B71B5E</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>243D3CA1EC8D6027004E0D6CC48BE30843B71B5E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>SCCF</string>
+			<string>SCCF-EDS</string>
 		</dict>
 	</array>
 </dict>

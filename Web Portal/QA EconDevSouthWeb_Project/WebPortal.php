@@ -59,7 +59,7 @@
 	  			<button type="submit" id="login" name="submit" style="background:#99cc33;"class="btn btn-primary">Login</button>
 		  		<button type="button" id="newuser" style="background:#99cc33;"class="btn btn-primary">New User</button>
 		  	</form>
-		  	<div style="clear:both;"><?php if (isset($_SESSION['error_message'])) {echo $_SESSION['error_message'];}?></div>
+		  	<div style="clear:both;"><?php if (isset($_SESSION['error_message'])) {error_log ($_SESSION['error_message']);}?></div>
     	</div>
 	</body>
 </html>

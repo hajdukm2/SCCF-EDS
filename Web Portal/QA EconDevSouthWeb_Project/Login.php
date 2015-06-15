@@ -11,7 +11,7 @@
     $password = md5($password);
 
     //Connect to Database
-    $db_connect = mysql_connect($databaseHost, $databaseHost, $databasePass) or die(mysql_error());
+    $db_connect = mysql_connect($databaseHost, $databaseUser, $databasePass) or die(mysql_error());
     mysql_select_db($databaseName, $db_connect);
 
     //verify credentials
