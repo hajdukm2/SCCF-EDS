@@ -37,4 +37,11 @@
     [self.storyboard instantiateViewControllerWithIdentifier:@"location"];
     [self presentViewController:secondViewController animated:YES completion:nil];
 }
+
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
+    
+}
+
 @end
