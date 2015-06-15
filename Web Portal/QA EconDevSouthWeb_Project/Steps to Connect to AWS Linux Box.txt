@@ -29,8 +29,12 @@ Steps to Connect to AWS Linux Box:
 
 	2) Connect to sql database:
 		PRODUCTION DATABASE:
-		mysql -h dev-db.cd6byyjzs6xl.us-west-2.rds.amazonaws.com -u admin -p
+		mysql -h economic-development-south-prod-db.cd6byyjzs6xl.us-west-2.rds.amazonaws.com -u admin -p
 		master password: adminpassword
+
+		PROD DB Login Info:
+	 		master username:admin
+	 		master password:adminpassword
 
 		QUALITY ASSURANCE DATABASE:
 		mysql -h qa-server-database.cd6byyjzs6xl.us-west-2.rds.amazonaws.com -u admin -p

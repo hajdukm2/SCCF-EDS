@@ -1,273 +1,425 @@
 <?php 
+
     require ("QA_Server_HelperFunctions.php");
+
     
+
     checkLogin();
+
 ?>
+
 <!DOCTYPE HTML>
+
 <html lang="en">
+
     <head>
+
         <title>
+
         EDS Administration
+
         </title>
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+
+            .menu-buttons{
+
+                color: #000000;
+
+                padding: 5px;
+
+                background-color: #FFE680;
+
+                margin: 10px;
+
+            }
+
+            .menu-buttons:hover{
+
+                background-color: #000000;
+
+                color: white;
+
+            }
+
+            .environment-issues:hover{
+
+                background-color: #8B4E9E;
+
+                color: white;
+
+            }
+
+            .issue_navigator{
+
+                position: absolute;
+
+                z-index: 1;
+
+                left: 20%;
+
+                top: 30%;
+
+            }
+
+        </style>
+
     </head>
-    <body style="padding-top: 70px; ">
-        <div class="container-fluid">
-        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#99cc33" >
-                <div class="navbar-header" style="background-color:#99cc33">
-                        <a class="navbar-brand" href="#">Economic Development South</a>
+
+    <body style="padding-top:30px; background-color:#8BAD7A; ">
+
+        <div class="container-fluid" style="width:100%; position:relative;">
+
+            <!--<div class = "issue_navigator text-center" style="width:300px; height:300px; border: solid 2px;"></div>-->
+
+                <!-- navbar-fixed-top -->
+
+                <nav class="navbar navbar-inverse " style="background-color:#FFE680; width:40%; border: 7px solid;" >
+
+                    <div class="navbar-header" >
+
+                        <a class="navbar-brand"href="#" style="color: black;">Economic Development South</a>
+
+                    </div>
+
+                    <div>
+
+                        <!-- nav navbar-nav text-center -->
+
+                        <br><br><br>
+
+                        <!--<ul class="" >-->
+
+                                <a class="menu-buttons" href="http://eds-qa-lb-495482778.us-west-2.elb.amazonaws.com/logout.php">Log Out</a>
+
+                                <a class="menu-buttons" href="#" id="galleryLink" >Gallery</a>
+
+                                <a class="menu-buttons" href="#" id="reportsLink" >Reports</a>
+
+                                <br><br>
+
+                        <!-- </ul>-->
+
+                    </div>
+
+                </nav>
+
+            <br><br>
+
+            <div class="text-center" style="width:100%;">
+
+                <div class="jumbotron" id="galleryTitle" style="background-color: #8B4E9E;" >
+
+                    <h2 class="text-center" style="color:white;">Table of All Environmental Issues:</h2> 
+
                 </div>
-                <div>
-                        <ul class="nav navbar-nav" >
-                                <li><a href="http://eds-qa-lb-495482778.us-west-2.elb.amazonaws.com/logout.php">Log Out</a></li>
-                                <li><a href="#" id="galleryLink">Gallery</a></li>
-                                <li><a href="#" id="reportsLink">Reports</a></li>
-                        </ul>
-                </div>
-        </nav>
-        </div>
-        <br><br><br><br><br>
-        <div class="container" id="gallery" style="width:100%;">
-            <h2>Table of All Environmental Issues:</h2> 
-            <div class ="row" style="width:100%;">
-                <div class = "col-md-12 table-responsive" style="overflow:auto;width:100%;">
-                    <table class="table table-striped">
-                    <thead>
-                            <tr>
-                                <th class="hideID">ID Number:</th>
-                                <th>Type of Issue:</th>
-                                <th>Photo:</th>
-                                <th>Description:</th>
-                                <th>Longitude:</th>
-                                <th>Latitude:</th>
-                                <th>Date:</th>
-                                <th>First Name:</th>
-                                <th>Last Name:</th>
-                                <th>Zip Code:</th>
-                                <th>Email:</th>
-                                <th>Phone Number:</th>
-                                <th>Delete Me?</th>
-                            </tr>
-                    </thead>
-                    <tbody>
-                            <?php 
-                                    //Database Connection Stuff:
-                                    $db_connect = mysql_connect($databaseHost, $databaseUser, $databasePass) or die(mysql_error());
-                                            mysql_select_db($databaseName, $db_connect);
 
-                                            //How many issues are there?
-                                            $sqlQuery = "SELECT * FROM Environment_Issues";
-                                            $result = mysql_query($sqlQuery, $db_connect) or die(mysql_error());
-                                            $numOfIssues = mysql_num_rows($result);
-                                            echo "Num of Rows of Data: " . $numOfIssues . "<br><br>";
-                                            //Turn list of all Environment Issues into associative arrary
-                                            //$environmentIssues = mysql_fetch_assoc($result);
-
-                                            $x= 0;
-                                            //foreach($environmentIssues as $columnName => $fieldValue) {
-                                            while ($environmentIssues = mysql_fetch_array($result, MYSQL_ASSOC)){
-                                            //echo "" . $x++ . "<br>";
-
-                                                //Get the id number of the issue:
-                                                $temp = $environmentIssues["id"];
-                                                if (strcmp($temp, "") == 0 ){
-                                                    //Start a new row in table
-                                                    echo "<tr>\n";
-                                                }
-                                                else{
-                                                    echo "<tr class=\"". $temp ."\">\n";
-                                                }
-
-                                                //Get the id number of the issue:
-                                                $temp = $environmentIssues["id"];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                        echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                        echo "<td class=\"hideID\">" . $temp . "</td>\n";
-                                                    }
-
-                                                    //See if 'Type of issue' field is blank
-                                                    $temp = $environmentIssues["issueType"];
-                                                    //echo "" . $test . "<br>";
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-
-                                                    //See if there is an image 
-                                                    $temp = $environmentIssues['Image_Here'];
-                                                    $temp2 = $environmentIssues['Image_Filepath'];
-                                                    if (strcmp($temp, "NO") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            $imgLocation = substr($temp2,13);
-                                                            $imgLocation = "http://eds-qa-lb-495482778.us-west-2.elb.amazonaws.com" . $imgLocation;
-                                                            echo "<td><img height=\"100\" width=\"100\"class = \"img-rounded\" src = \"" . $imgLocation . "\"></td>\n";
-                                                    }
-
-
-                                                    //See if 'Description' field is blank 
-                                                    $temp = $environmentIssues['description'];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-
-                                                    //See if 'Longitude' field is blank 
-                                                    $temp = $environmentIssues['longitude'];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-
-                                                    //See if 'Latitude' field is blank
-                                                    $temp = $environmentIssues['latitude'];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-
-                                                    //See if 'Date' field is blank
-                                                    $temp =  $environmentIssues['date'];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-
-                                                    //See if 'First Name' field is blank 
-                                                    $temp = $environmentIssues['firstName'];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-
-                                                    //See if 'Last Name' field is blank 
-                                                    $temp = $environmentIssues['lastName'];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-
-                                                    //See if 'zip-code' field is blank 
-                                                    $temp = $environmentIssues['zipCode'];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-
-                                                    //See if 'zip-code' field is blank 
-                                                    $temp = $environmentIssues['email'];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-                                                    //See if 'phone number' field is blank
-                                                    $temp = $environmentIssues['phoneNumber'];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                            echo "<td>" . " No-Content \n" . "</td>\n";
-                                                    }
-                                                    else{
-                                                            echo "<td>" . $temp . "</td>\n";
-                                                    }
-
-                                                    //Get the id number of the issue:
-                                                    $temp = $environmentIssues["id"];
-                                                    if (strcmp($temp, "") == 0 ){
-                                                        //Add Delete Button
-                                                        echo "<td><button type=\"button\">Delete Me</button></td>\n";
-                                                    }
-                                                    else{
-                                                        //Add Delete Button
-                                                        echo "<td><button type=\"button\" class=\"". $temp ."\">Delete Me</button></td>\n";
-                                                    }
-
-                                                    //Close row in table
-                                                    echo "</tr>\n";
-
-                                            }
-
-                                            mysql_close($db_connect);
-
-                                      ?>
-                    </tbody>
-                    </table>
-                </div>
-            </div>           
-          </div>
-            <div class="container" id="reports">
             </div>
-            <script>
-                    $(document).ready(function(){
-                            //Hide Gallery Section
-                            $("#gallery").hide();
 
-                            //Hide ID Column
-                            $( ".hideID" ).hide();
+            <div class="row col-md-12 table-responsive" id="gallery" style="overflow:auto;width:100%;padding:0px; margin:0px;" ng-app="loadIssues" ng-controller="loadIssuesCtrl">
 
-                            $("#galleryLink").click(function(){
-                                    //$("#gallery").show();
-                                    $( "#gallery" ).fadeIn(1100, function() {
-                                        // Animation complete
-                                      });
-                                    $("#reports").hide();
-                            });
+                <table class="table " style="background-color:white; border: 5px solid; width:100%; padding:0px; margin:0px;">
 
-                            $("#reportsLink").click(function(){
-                                    $("#gallery").hide();
-                                    $("#reports").fadeIn(1100);
-                            });
+                    <thead>
 
-                            //When the Delete Button is clicked:
-                            $("button").click(function(){
-                                //grab the button element that was clicked
-                                var element = $(this); 
+                        <tr>
 
-                                //Get the class of the button that was clicked
-                                var elementClass = "."+element.attr("class")+"";
+                            <th ng-show="false">ID Number:</th>
 
-                                //alert("delete clicked: "+elementClass);
+                            <th>Type of Issue:</th>
 
-                                //Hide all elements of that class
-                                $(elementClass).hide();
+                            <th>Photo:</th>
 
-                                //Delete Environment Issue from Database
-                                $.post( "deleteEntry.php", { id: element.attr("class") } );
-                            });
+                            <th class="hidden-xs ">Description:</th>
 
-                    });
-            </script>
+                            <th class="hidden-xs hidden-sm">Latitude:</th>
+
+                            <th class="hidden-xs hidden-sm">Longitude:</th>
+
+                            <th class="hidden-xs hidden-sm hidden-md">Date:</th>
+
+                            <th class="hidden-xs hidden-sm hidden-md">First Name:</th>
+
+                            <th class="hidden-xs hidden-sm hidden-md">Last Name:</th>
+
+                            <th class="hidden-xs hidden-sm hidden-md hidden-lg">Zip Code:</th>
+
+                            <th class="hidden-xs hidden-sm hidden-md">Email:</th>
+
+                            <th class="hidden-xs hidden-sm hidden-md">Phone Number:</th>
+
+                            <th>Delete?</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tr class="environment-issues" id="{{issue.id}}" ng-repeat="issue in listOfIssues">
+
+                      <td ng-show="false">
+
+                        {{issue.id}}      
+
+                      </td>
+
+                      <td>
+
+                          <span ng-if="issue.issueType === ''" ng-then="IssueType">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="IssueType">
+
+                            {{ issue.issueType }}
+
+                          </span> 
+
+                      </td>
+
+                      <td>
+
+                          <img height="100" width="100" class = "img-rounded" src="http://eds-qa-lb-495482778.us-west-2.elb.amazonaws.com{{ issue.Image_Filepath.substring(13)}}"
+
+                      </td>
+
+                      <td class="hidden-xs ">
+
+                          <span ng-if="issue.description === ''" ng-then="Description">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="Description">
+
+                            {{issue.description}}
+
+                          </span>
+
+                      </td>
+
+                      <td class="hidden-xs hidden-sm">
+
+                          <span ng-if="issue.latitude === ''" ng-then="Latitude">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="Latitude">
+
+                            {{ issue.latitude }}
+
+                          </span>
+
+                      </td>
+
+                      <td class="hidden-xs hidden-sm">
+
+                          <span ng-if="issue.longitude === ''" ng-then="Longitude">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="Longitude">
+
+                            {{ issue.longitude }}
+
+                          </span>
+
+                      </td>
+
+                      
+
+                      <td class="hidden-xs hidden-sm hidden-md">
+
+                          <span ng-if="issue.date === ''" ng-then="Date">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="Date">
+
+                            {{ issue.date }}
+
+                          </span>
+
+                      </td>
+
+                      <td class="hidden-xs hidden-sm hidden-md">
+
+                          <span ng-if="issue.firstName === ''" ng-then="FirstName">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="FirstName">
+
+                            {{issue.firstName}}
+
+                          </span>
+
+                      </td>
+
+                      <td class="hidden-xs hidden-sm hidden-md">
+
+                          <span ng-if="issue.lastName === ''" ng-then="LastName">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="LastName">
+
+                            {{issue.lastName}}
+
+                          </span>
+
+                      </td>
+
+                      <td class="hidden-xs hidden-sm hidden-md hidden-lg">
+
+                          <span ng-if="issue.zipCode === ''" ng-then="ZipCode">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="ZipCode">
+
+                            {{ issue.zipCode }}
+
+                          </span>
+
+                      </td>
+
+                      <td class="hidden-xs hidden-sm hidden-md">
+
+                          <span ng-if="issue.email === ''" ng-then="Email">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="Email">
+
+                            {{ issue.email }}
+
+                          </span>
+
+                      </td>
+
+                      <td class="hidden-xs hidden-sm hidden-md">
+
+                          <span ng-if="issue.phoneNumber === ''" ng-then="PhoneNumber">
+
+                            {{"No-Content"}}
+
+                          </span>
+
+                          <span ng-else="PhoneNumber">
+
+                            {{ issue.phoneNumber }}
+
+                          </span>
+
+                      </td>
+
+                      <td><button type="button" ng-click="delete(issue.id)" style=" background-color:#FF6666; color:black; border-radius: 25px;">Delete</button></td>
+
+                    </tr>
+
+                </table>
+
+        </div>           
+
+        <div class="row" id="reports" style="width:100%;">
+
+            <div class ="row" style="width:100%;">
+
+                <div class = "col-md-12 table-responsive" style="overflow:auto;width:100%;">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        $(document).ready(function(){
+
+                //Hide Gallery Section
+
+                $("#gallery").hide();
+
+                $("#galleryTitle").hide();
+
+                
+
+                //Hide ID Column
+
+                //$(".hideID" ).hide();
+
+
+
+                $("#galleryLink").click(function(){
+
+                        //$("#gallery").show();
+
+                        $( "#gallery" ).fadeIn(1100, function() {
+
+                            // Animation complete
+
+                          });
+
+                        $( "#galleryTitle" ).fadeIn(1100, function() {
+
+                            // Animation complete
+
+                          });
+
+                        $("#reports").hide();
+
+                });
+
+
+
+                $("#reportsLink").click(function(){
+
+                        $("#gallery").hide();
+
+                        $("#galleryTitle").hide();
+
+                        $("#reports").fadeIn(1100);
+
+                });
+
+        });
+
+    </script>
+
+    <!-- Referenced Scripts-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+    <script src="./JavaScript/RetrieveAndLoadEnvironmentIssues_AngularJS.js"></script>
+
     </body>
+
 </html>
-	

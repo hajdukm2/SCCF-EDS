@@ -21,18 +21,24 @@
      private $validImageSubmitted = "";
      
      
-     function __construct($environ_Issue_Json, $directoryToSaveTo) {
-        $newEnvironmentIssueData = json_decode($environ_Issue_Json, TRUE);
-     
-        $this->$firstName = $newEnvironmentIssueData["firstName"];
-        $this->$lastName = $newEnvironmentIssueData["lastName"];
-        $this->$phoneNumber = $newEnvironmentIssueData["phoneNumber"];
-        $this->$email = $newEnvironmentIssueData["email"];
-        $this->$zipCode = $newEnvironmentIssueData["zipCode"];
-        $this->$description = $newEnvironmentIssueData["description"];
-        $this->$issueType = $newEnvironmentIssueData["issueType"];
-        $this->$longitude = $newEnvironmentIssueData["longitude"];
-        $this->$latitude = $newEnvironmentIssueData["latitude"];
+     function __construct($newEnvironmentIssueData, $directoryToSaveTo) {
+       // ob_start();
+        //var_dump($newEnvironmentIssueData);
+       // $contents = ob_get_contents();
+        //ob_end_clean();
+        
+        //error_log($contents);
+        //error_log($newEnvironmentIssueData["firstName"]);
+        
+        $this->firstName = $newEnvironmentIssueData["firstName"];
+        $this->lastName = $newEnvironmentIssueData["lastName"];
+        $this->phoneNumber = $newEnvironmentIssueData["phoneNumber"];
+        $this->email = $newEnvironmentIssueData["email"];
+        $this->zipCode = $newEnvironmentIssueData["zipCode"];
+        $this->description = $newEnvironmentIssueData["description"];
+        $this->issueType = $newEnvironmentIssueData["issueType"];
+        $this->latitude = $newEnvironmentIssueData["latitude"];
+        $this->longitude = $newEnvironmentIssueData["longitude"];
      
         //This is the directory where Images will be saved to on the web server
         $this->imageSavingDirectory = $directoryToSaveTo;
@@ -103,18 +109,18 @@
          $this->validImageSubmitted = TRUE;
          
          $this->imageName = $imageName;
-         echo "Update: Image Name from CellPhone: " . $this->imageName;
+         error_log ("Update: Image Name from CellPhone: " . $this->imageName);
          
          $this->imageFileType = $imageFileType;
-         echo "Update: Image File Type from CellPhone: " . $this->imageFileType;
+         error_log ("Update: Image File Type from CellPhone: " . $this->imageFileType);
          
          //Try to Save the Image to its the Permanent Location on the Web Server
          if (move_uploaded_file($currentTempLocation, "".$this->imageSavingDirectory.$this->imageName)){
-            echo "Update: The Image was successfully uploaded to the Web Server!";
+            error_log ("Update: The Image was successfully uploaded to the Web Server!");
             $this->absPathToImage = $this->imageSavingDirectory.$this->imageName;
          }
          else{
-            echo "Error Update: The Image was not successfully uploaded to the Web Server!";
+            error_log ("Error Update: The Image was not successfully uploaded to the Web Server!");
             $this->validImageSubmitted = FALSE; 
          }
      }
@@ -126,6 +132,13 @@
      
      public function hasImage(){
          return ($this->validImageSubmitted);
+     }
+     
+     public function hasImageStr(){
+         if ($this->validImageSubmitted){
+             return "YES";
+         }
+         else{ return "NO"; }
      }
      
  }   

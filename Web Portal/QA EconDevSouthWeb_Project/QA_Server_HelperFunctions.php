@@ -35,7 +35,7 @@
         $_SESSION['error_message'] = "";
         session_destroy();
         
-        echo "Update: User Logged Out. \n";
+        error_log ("Update: User Logged Out. \n");
         
         //Redirects the User to the Login Web Portal
         header('Location: http://eds-qa-lb-495482778.us-west-2.elb.amazonaws.com/WebPortal.php');
