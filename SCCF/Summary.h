@@ -10,6 +10,7 @@
 #import "MyLocationViewController.h"
 #import "UserInfo.h"
 #import "MyLocationViewController.h"
+#import "LMViewController.h"
 
 @interface Summary : UIViewController{
   
@@ -30,6 +31,11 @@
     IBOutlet UILabel *looVal;
     IBOutlet UILabel *laaVal;
     IBOutlet UILabel *hazard;
+    IBOutlet UILabel *descript;
+    IBOutlet UILabel *adressy;
+    
+    
+    IBOutlet UIScrollView *scrollyV;
 
 }
 

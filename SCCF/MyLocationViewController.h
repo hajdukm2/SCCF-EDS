@@ -14,11 +14,12 @@
 NSString *mMYGlobalVariable;
 NSString *YGlobalVariable;
 
-@interface MyLocationViewController : UIViewController {
-    MKMapView *mapview;
+@interface MyLocationViewController :   UIViewController  <UITextViewDelegate> {
+    MKMapView *mapview ;
         __weak IBOutlet UILabel *latVal;
 
     IBOutlet UIButton *button1;
+    __weak IBOutlet UITextField *enterAddress;
     
     
     }
@@ -31,6 +32,8 @@ NSString *YGlobalVariable;
 @property (weak, nonatomic) IBOutlet UILabel *LaVal;
 @property (weak, nonatomic) IBOutlet UILabel *LoVal;
 @property (nonatomic, retain) IBOutlet MKMapView *mapview;
+@property (strong, nonatomic) IBOutlet UITextField *enterAddress;
+@property (strong, nonatomic) IBOutlet UILabel *addressLabel;
 
 - (IBAction)buttonPressed:(id)sender;
 - (IBAction)passdata:(id)sender;

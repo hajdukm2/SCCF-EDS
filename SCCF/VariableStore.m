@@ -1,6 +1,7 @@
 #import "VariableStore.h"
 
 NSString *fName;
+NSString *address;
 NSString *lName;
 NSString *eMail;
 NSString *pNum;
@@ -24,6 +25,7 @@ UIImage *image;
         myInstance  = [[[self class] alloc] init];
         
         fName = @"First Name";
+        address = @"Address";
         lName = @"Last Name";
         eMail = @"E-Mail Address";
         pNum = @"Phone Number";
@@ -44,6 +46,12 @@ UIImage *image;
 -(NSString*) getFName{
     return fName;
 }
+
+-(NSString*) getAddress{
+    return address;
+}
+
+
 
 -(NSString*) getLName{
     return lName;
@@ -87,6 +95,11 @@ UIImage *image;
 -(void) setFName: (NSString*) n{
     fName = n;
 }
+
+-(void) setAddress:(NSString*) n{
+    address = n;
+}
+
 
 -(void) setLName: (NSString*) n{
     lName = n;
