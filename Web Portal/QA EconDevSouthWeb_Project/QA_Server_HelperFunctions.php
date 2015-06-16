@@ -3,15 +3,16 @@
     session_start();
     
     //Database Setup and Variables
-    $databaseUser = 'EDSQADB';
-    $databasePass = 'EDSQADBpass';
-    $databaseHost = 'qa-server-database.cd6byyjzs6xl.us-west-2.rds.amazonaws.com';
+    $databaseUser = 'EDSQADB'; //admin
+    $databasePass = 'EDSQADBpass'; //adminpassword
+    $databaseHost = 'qa-server-database.cd6byyjzs6xl.us-west-2.rds.amazonaws.com'; //dev-db.cd6byyjzs6xl.us-west-2.rds.amazonaws.com
     $databaseName = 'Econ_Dev_South';
     
     //Checks that the User has logged in already
     function checkLogin(){
         if (!isset($_SESSION['Loggedin'])){
             $_SESSION['error_message'] = "You Need to Login First!";
+            //header('Location: http://EDSAppLB-1862368837.us-west-2.elb.amazonaws.com/WebPortal.php');
             header('Location: http://eds-qa-lb-495482778.us-west-2.elb.amazonaws.com/WebPortal.php');
             exit;   
         }
@@ -23,6 +24,7 @@
                 $_SESSION['error_message'] = "You Need to Login First to View That Page!";
                 
                 //Redirects the User to the Login Web Portal
+                //header('Location: http://EDSAppLB-1862368837.us-west-2.elb.amazonaws.com/WebPortal.php');
                 header('Location: http://eds-qa-lb-495482778.us-west-2.elb.amazonaws.com/WebPortal.php');
                 exit;
             }
@@ -38,6 +40,7 @@
         error_log ("Update: User Logged Out. \n");
         
         //Redirects the User to the Login Web Portal
+        //header('Location: http://EDSAppLB-1862368837.us-west-2.elb.amazonaws.com/WebPortal.php');
         header('Location: http://eds-qa-lb-495482778.us-west-2.elb.amazonaws.com/WebPortal.php');
         exit;
     }
