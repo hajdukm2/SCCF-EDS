@@ -11,6 +11,10 @@
 
 @implementation ViewController
 
+-(void)viewDidLoad{
+    button1.hidden = YES;
+}
+
 -(IBAction)hide1 {
     button1.hidden = YES;
 }
@@ -56,6 +60,9 @@
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    button2.hidden = NO;
+    button1.hidden = YES;
+    white.hidden = YES;
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
