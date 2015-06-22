@@ -17,9 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[VariableStore sharedInstance] setLattitude: @"0"];
-    [[VariableStore sharedInstance] setLongitude: @"0"];
-    [[VariableStore sharedInstance] setAddress: @" "];
     
     // Do any additional setup after loading the view.
 }

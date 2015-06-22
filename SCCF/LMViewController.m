@@ -45,7 +45,9 @@ CLPlacemark *placemark;
 {
     [self.manualAdd addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [super viewDidLoad];
-    
+    [[VariableStore sharedInstance] setLattitude: @"0"];
+    [[VariableStore sharedInstance] setLongitude: @"0"];
+    [[VariableStore sharedInstance] setAddress: @" "];
     
     self.manualAdd.delegate = self;
 
