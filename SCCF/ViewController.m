@@ -12,12 +12,16 @@
 @implementation ViewController
 
 -(void)viewDidLoad{
+    //make sure continue button is hidden on screen load (even if user returns to previous sreen)
     button1.hidden = YES;
 }
 
+//continue button
 -(IBAction)hide1 {
     button1.hidden = YES;
 }
+
+//no photo button
 -(IBAction)hide2 {
     button2.hidden = YES;
 
