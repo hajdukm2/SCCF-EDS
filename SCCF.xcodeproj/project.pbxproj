@@ -116,7 +116,6 @@
 		4ADF94D91A951F4200FCF9BD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADF94CB1A951F4200FCF9BD /* QuartzCore.framework */; };
 		4ADF94DA1A951F4200FCF9BD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADF94CC1A951F4200FCF9BD /* Security.framework */; };
 		4ADF94DB1A951F4200FCF9BD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADF94CD1A951F4200FCF9BD /* Social.framework */; };
-		4ADF94DC1A951F4200FCF9BD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADF94CE1A951F4200FCF9BD /* StoreKit.framework */; };
 		4ADF94DD1A951F4200FCF9BD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADF94CF1A951F4200FCF9BD /* SystemConfiguration.framework */; };
 		4ADF94DE1A951F4200FCF9BD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADF94D01A951F4200FCF9BD /* UIKit.framework */; };
 		4ADF94E11A951F6200FCF9BD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADF94DF1A951F6200FCF9BD /* libsqlite3.dylib */; };
@@ -325,7 +324,6 @@
 		4ADF94CB1A951F4200FCF9BD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4ADF94CC1A951F4200FCF9BD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4ADF94CD1A951F4200FCF9BD /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		4ADF94CE1A951F4200FCF9BD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4ADF94CF1A951F4200FCF9BD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4ADF94D01A951F4200FCF9BD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4ADF94DF1A951F6200FCF9BD /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -423,7 +421,6 @@
 				4ADF94D91A951F4200FCF9BD /* QuartzCore.framework in Frameworks */,
 				4ADF94DA1A951F4200FCF9BD /* Security.framework in Frameworks */,
 				4ADF94DB1A951F4200FCF9BD /* Social.framework in Frameworks */,
-				4ADF94DC1A951F4200FCF9BD /* StoreKit.framework in Frameworks */,
 				4ADF94DD1A951F4200FCF9BD /* SystemConfiguration.framework in Frameworks */,
 				4ADF94DE1A951F4200FCF9BD /* UIKit.framework in Frameworks */,
 			);
@@ -534,7 +531,6 @@
 				4ADF94CB1A951F4200FCF9BD /* QuartzCore.framework */,
 				4ADF94CC1A951F4200FCF9BD /* Security.framework */,
 				4ADF94CD1A951F4200FCF9BD /* Social.framework */,
-				4ADF94CE1A951F4200FCF9BD /* StoreKit.framework */,
 				4ADF94CF1A951F4200FCF9BD /* SystemConfiguration.framework */,
 				4ADF94D01A951F4200FCF9BD /* UIKit.framework */,
 				4ADF94921A951C2100FCF9BD /* SCCF */,
@@ -745,6 +741,11 @@
 					4ADF948F1A951C2100FCF9BD = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = KPKTUDP4RM;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					4ADF94A81A951C2100FCF9BD = {
 						CreatedOnToolsVersion = 6.1;
@@ -1084,6 +1085,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1107,6 +1109,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
