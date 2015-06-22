@@ -15,6 +15,7 @@
     IBOutlet UIButton *button1;
     IBOutlet UIButton *button2;
     IBOutlet UIImageView *white;
+    IBOutlet UILabel *noPhoto;
     
     
     
