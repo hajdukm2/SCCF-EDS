@@ -1823,13 +1823,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ac1-iC-Z6d">
-                                        <rect key="frame" x="9" y="190" width="112" height="30"/>
-                                        <state key="normal" title="Edit Information">
-                                            <color key="titleColor" red="0.86262869834899902" green="0.0" blue="0.049863234853260219" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                 </subviews>
                             </scrollView>
                             <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="iglass2.png" translatesAutoresizingMaskIntoConstraints="NO" id="le3-KK-LM6">
