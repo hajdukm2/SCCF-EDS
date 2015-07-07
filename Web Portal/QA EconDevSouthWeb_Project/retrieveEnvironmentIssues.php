@@ -19,7 +19,7 @@ $db_connect = mysql_connect($databaseHost, $databaseUser, $databasePass) or die(
 mysql_select_db($databaseName, $db_connect);
 
 //Grab All the Issues from the Database
-$sqlQuery = "SELECT * FROM Environment_Issues";
+$sqlQuery = "SELECT * FROM Environment_Issues ORDER BY date DESC";
 $result = mysql_query($sqlQuery, $db_connect) or die(mysql_error());
 
 //How many issues are there?
