@@ -394,11 +394,14 @@
     } else {
         printf("Connection could not be made");//something bad happened
     }
-    */
+    
     
     //Image Uploading
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://edsapplb-1862368837.us-west-2.elb.amazonaws.com/"]];
+     */
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://eds-qa-lb-495482778.us-west-2.elb.amazonaws.com/"]];
     NSData *imageData = UIImageJPEGRepresentation(newImage, 1.0);
     
     [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
