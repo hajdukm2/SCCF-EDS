@@ -84,8 +84,61 @@ loadIssues.controller("loadIssuesCtrl",["$scope", "$http","$parse", "$rootScope"
     });  
     
     $scope.delete = function (idToDelete){
+        //Update Issue Navigator: Go to the next issue
+        if ( angular.element("#modaltest").hasClass('in') ){
+            //Issue Navigator is Visible
+            //alert ("Navigator is Visible");
+            /* Will need to refactor this so it doesnt keep looping once id is found*/
+            for (index = 0; index < ($scope.listOfIssues.length); index++){
+                //Found the issue we want to delete
+                if (idToDelete.toString() == $scope.listOfIssues[index].id.toString()){
+                    
+                    /* If this is the last issue and there is more than one issue,
+                     * load the previous issue 
+                     */
+                    if ( (index == ($scope.listOfIssues.length -1)) && ($scope.listOfIssues.length > 1) ){ 
+                        //alert("last issue, more than one");
+                        //Load Previous Issue
+                        $scope.loadIssueNavigator($scope.listOfIssues[index-1].id.toString());
+                    }
+                    /* Else If this is the last issue and there was only one 
+                     * issue to begin with 
+                     */
+                    else if ((index == ($scope.listOfIssues.length -1)) && (!($scope.listOfIssues.length > 1)) ){
+                        //alert("last issue, only one");
+                        //Just close Modal:
+                        angular.element("#modaltest").modal("hide");
+                    }
+                    /*This is the first Issue and there is more than one issue*/
+                    else if (index == '0' && ($scope.listOfIssues.length > 1)){
+                        //alert("first issue, more than one");
+                        //Load the next Issue:
+                        $scope.loadIssueNavigator($scope.listOfIssues[index+1].id.toString());
+                    }
+                    /* This is the first Issue and there is not more than one issue*/
+                    else if ( index == '0' && (!($scope.listOfIssues.length > 1)) ){
+                        //alert("first issue, only one");
+                        //Just close Modal:
+                        angular.element("#modaltest").modal("hide");
+                    }
+                    /*There is another issue after this one, so just load that*/
+                    else {
+                        //alert("just load next issue");
+                        //Load the next issue:
+                        $scope.loadIssueNavigator($scope.listOfIssues[index+1].id.toString());
+                    }
+                }
+            }
+        }
+        else{
+            //Issue Navigator is not Visible
+            //alert ("Navigator is NOT Visible\nValue: "+angular.element("#modaltest").hasClass('in'));
+        }
+        
         //Remove this Environment Issue
         angular.element("#"+idToDelete).remove();
+        //Remove this Environment Issue from the scope list
+        $scope.deleteFromScopeList(idToDelete);
 
         //alert("Button Clicked: "+idToDelete);
         
@@ -101,6 +154,25 @@ loadIssues.controller("loadIssuesCtrl",["$scope", "$http","$parse", "$rootScope"
         // or server returns response with an error status.
             alert("Environment Issue Not Deleted.: "+idToDelete);
         });
+        
+    };
+    
+    $scope.deleteFromScopeList = function (id){
+        $scope.listOfIssuesTemp = new Array();
+      
+        for (index = 0; index < ($scope.listOfIssues.length); index++){
+            //Found the issue we want to delete
+            if (id.toString() == $scope.listOfIssues[index].id.toString()){
+                continue; //skip over this issue, dont add it to the list
+            }
+            else{
+                //Keep in the list
+                $scope.listOfIssuesTemp.push($scope.listOfIssues[index]);
+            }
+        }
+        
+        //Update List of Environmental Issues
+        $scope.listOfIssues = $scope.listOfIssuesTemp;
     };
     
     $scope.loadIssueNavigator = function(id){

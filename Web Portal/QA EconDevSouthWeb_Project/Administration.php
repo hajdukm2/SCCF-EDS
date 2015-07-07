@@ -201,7 +201,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title"><span class="navigator">Type of Issue:</span> {{navigator.issueType}}</h4><br>
-                            <div style="width:100%;"><button style="float:left;" class=" btn btn-danger" style="margin-right:10px;margin-left:50px;" ng-click="delete(navigator.id)"data-dismiss="modal">Delete</button><button type="button" style="float:right;" class="btn btn-success" style="float:right;" data-dismiss="modal">Close</button></div><br>
+                            <div style="width:100%;"><button style="float:left;" class=" btn btn-danger" style="margin-right:10px;margin-left:50px;" ng-click="delete(navigator.id)">Delete</button><button type="button" style="float:right;" class="btn btn-success" style="float:right;" data-dismiss="modal">Close</button></div><br>
                         </div>
                         <div class="modal-body">
                             <table class="table table-bordered">
@@ -234,10 +234,10 @@
         <div class="row" id="reports" style="width:100%;">        
             <div class ="row" style="width:100%;">
                 <div class = "col-md-12 table-responsive" style="overflow:auto;width:100%;" ng-controller="issuesNavigatorCtrl">
-                    <!--
+                   <!--
                     <span>{{ testData }}</span><br><br>
                     <span>{{ dataPassed }}</span>
-                    -->
+                   -->
                 </div>
             </div>
         </div>
